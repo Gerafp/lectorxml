@@ -7,8 +7,7 @@
         $texto .= "### ".$elemento->emph."\n\n";
       }
       elseif ($elemento->object) {
-        $attb = $elemento->object->attributes();
-        $texto .= "![Texto Alternativo](".$attb['src'].")\n\n";
+        $texto .= obj($elemento->object);
       }
       else {
         $texto .= "#### ".$elemento."\n\n";

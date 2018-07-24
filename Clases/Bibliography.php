@@ -1,30 +1,42 @@
 <?php
 function biBliography($seccion){
   $texto = "";
-  $texto .= h($seccion->h);
-
-  $i = 1;
-  foreach ($seccion->entry as $entrada) {
-    $aux = $entrada->attributes();
-    $texto .= $aux['id'].". ".$entrada."\n";
+  foreach ($seccion as $tipe) {
+    switch ((string)$tipe->getName()) {
+      case 'h':
+        $texto .= h($tipe);
+        break;
+      case 'entry':
+        $texto .= Entry($tipe);
+        break;
+      default:
+        break;
+    }
   }
   return $texto;
+}
+
+function Entry($entrada){
+  $aux = $entrada->attributes();
+  return $aux['id'].". ".$entrada."\n";
 }
 
 function Apendix($seccion){
   $texto = "";
-  foreach ($seccion->section as $apendix) {
-    $texto .= h($apendix->h);
-    $texto .= Ps($apendix->p);
+  foreach ($seccion as $tipe) {
+    switch ((string)$tipe->getName()) {
+      case 'h':
+        $texto .= h($tipe);
+        break;
+      case 'p':
+        $texto .= p($tipe);
+        break;
+      default:
+        //code
+        break;
+    }
   }
   return $texto;
 }
 
-function Ps($ps){
-  $texto = "";
-  foreach ($ps as $p) {
-    $texto .= p($p);
-  }
-  return $texto;
-}
 ?>

@@ -67,7 +67,22 @@
  }
 
  function BackMatter($padre, $Parsedown){
-	echo $Parsedown->text(biBliography($padre->bibliography));
-	echo $Parsedown->text(Apendix($padre));
+	 echo "<div class=resumen align=justify>";
+	 foreach ($padre as $seccion) {
+		 switch ($seccion->getName()) {
+		 	case 'bibliography':
+		 		echo $Parsedown->text(biBliography($seccion));
+		 		break;
+			case 'section':
+				if ($seccion['role'] == "apendix") {
+					echo $Parsedown->text(Apendix($seccion));
+				}
+		 		break;
+		 	default:
+				//code
+		 		break;
+		 }
+	 }
+	 echo "</div>";
  }
 ?>

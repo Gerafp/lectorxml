@@ -21,4 +21,9 @@ function p($value){
   return $value."\n\n";
 }
 
+function obj($value){
+  $attb = $value->attributes();
+  return "![Texto Alternativo](".$attb['src'].")\n\n";
+}
+
 ?>
