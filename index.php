@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Lector XML</title>
+		<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
 	</head>
 	<body>
 		<?php
@@ -18,7 +19,7 @@
 			$Parsedown = new Parsedown();
 			$codigo = $_GET['code'];
 
-			$path = "C:/xampp/htdocs/lectorxml/".$codigo."/"; #Aquí va el Path de acceso a los recursos
+			$path = "".$codigo."/"; #Aquí va el Path de acceso a los recursos
 			$pathxml = $path.$codigo.".xml";
 			//echo $pathxml;
 
