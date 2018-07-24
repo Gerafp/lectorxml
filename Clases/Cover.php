@@ -34,6 +34,6 @@
   }
   function Ntr($value){
     return "- ".$value."\n\n";
-    #return "1. [".$value."](#'".$value."')\n";
+    #return "1. [".$value."](#'".$value."') \n";
   }
 ?>

@@ -53,7 +53,7 @@ function item($value){
 
 function qte($value){
   $texto = "> ";
-  $texto .= $value->p."\n\n";
+  $texto .= p($value->p)."\n\n";
   return $texto;
 }
 
