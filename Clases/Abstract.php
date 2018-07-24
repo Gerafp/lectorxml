@@ -3,14 +3,12 @@
     $texto = '';
     #echo $seccion->h->emph;
     foreach ($seccion as $elemento) {
-      if($elemento->emph){
+      if((string)$elemento->getName() == "h"){
         $texto .= h($elemento);
-      }
-      else {
+      }elseif ((string)$elemento->getName() == "p") {
         $texto .= p($elemento);
       }
     }
     return $texto;
   }
-
 ?>

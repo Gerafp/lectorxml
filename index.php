@@ -5,6 +5,7 @@
 	include('Clases/Clean.php');
 	include('Clases/Cover.php');
 	include('Clases/Abstract.php');
+	include('Clases/Charper.php');
 	include('Clases/Bibliography.php');
 
 	$Parsedown = new Parsedown();
@@ -58,14 +59,15 @@
 	 }
  }
  function BodyMatter($padre, $Parsedown){
-	 echo "----------------BodyMatter-----------------------\n";
-	 echo "----------------pendiente------------------------";
+	 echo "<div class=resumen align=justify>";
+	 foreach ($padre->section as $seccion){
+			 echo $Parsedown->text(Seccion($seccion,""));
+		 }
+	 echo "</div>";
  }
 
  function BackMatter($padre, $Parsedown){
 	echo $Parsedown->text(biBliography($padre->bibliography));
 	echo $Parsedown->text(Apendix($padre));
-	echo "----------------BackMatter-----------------------\n";
-	echo "----------------pendiente------------------------";
  }
 ?>
