@@ -15,4 +15,25 @@
     }
     return $texto;
   }
+  function Tc($seccion){
+    $texto = "";
+    foreach ($seccion as $tipe) {
+      switch ((string)$tipe->getName()) {
+        case 'h':
+          $texto .= h($tipe);
+          break;
+        case 'entry':
+          $texto .= Ntr($tipe);
+          break;
+        default:
+          // code...
+          break;
+      }
+    }
+    return $texto;
+  }
+  function Ntr($value){
+    return "- ".$value."\n\n";
+    #return "1. [".$value."](#'".$value."')\n";
+  }
 ?>

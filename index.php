@@ -70,6 +70,13 @@
 						 break;
 				 }
 			 }
+			 foreach ($padre as $seccion){
+				 if($seccion->getName()=='toc'){
+					 echo "<div class=resumen align=justify>";
+					 echo $Parsedown->text(Tc($seccion));
+					 echo "</div>";
+				 }
+			 }
 		 }
 		 function BodyMatter($padre, $Parsedown){
 			 echo "<div class=BodyMatter align=justify>";
