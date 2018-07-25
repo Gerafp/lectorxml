@@ -33,7 +33,7 @@
     return $texto;
   }
   function Ntr($value){
-    return "- ".$value."\n\n";
-    #return "1. [".$value."](#'".$value."') \n";
+    #return "- ".$value."\n\n";
+    return "- [".$value."](#".ForInt($value).")\n";
   }
 ?>

@@ -73,7 +73,7 @@
 			 }
 			 foreach ($padre as $seccion){
 				 if($seccion->getName()=='toc'){
-					 echo "<div class=resumen align=justify>";
+					 echo "<div class=indice align=justify>";
 					 echo $Parsedown->text(Tc($seccion));
 					 echo "</div>";
 				 }

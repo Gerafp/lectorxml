@@ -1,3 +1,7 @@
 emph {
     font-weight: bold;
 }
+img{
+  display:block;
+  margin:auto;
+}

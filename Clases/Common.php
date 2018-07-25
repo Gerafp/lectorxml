@@ -9,9 +9,11 @@ function h($value){
 
 function hc($value, $nivel){
   if($value->emph){
-    return $nivel." ".$value->emph."\n\n";
+    #return $nivel." ".$value->emph."\n\n";
+    return $nivel." ".$value->emph."<a name=".ForInt($value->emph)."></a>\n\n";
   }
-  return $nivel." ".(String)$value."\n\n";
+  #return $nivel." ".(String)$value."\n\n";
+  return $nivel." ".(String)$value."<a name=".ForInt($value)."></a>\n\n";
 }
 
 function p($value){
@@ -57,4 +59,8 @@ function qte($value){
   return $texto;
 }
 
+function ForInt($value){
+  $aux = preg_replace('(\s[0-9]*)','',$value);
+  return str_replace('.',"",str_replace('*','',$aux));
+}
 ?>
