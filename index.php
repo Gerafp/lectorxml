@@ -11,8 +11,7 @@
 
 			include('Clases/Common.php');
 			include('Clases/Clean.php');
-			include('Clases/Cover.php');
-			include('Clases/Abstract.php');
+			include('Clases/FrontMatter.php');
 			include('Clases/Charper.php');
 			include('Clases/Bibliography.php');
 
@@ -54,28 +53,19 @@
 		# -----------------------------------------------------------------------------
 		 function FrontMatter($padre, $Parsedown){
 			 #Primera parte Cover y Abstract
-			 foreach ($padre->section as $seccion){
-				 switch ($seccion['role']) {
-					 case 'cover':
-						 echo "<div class=portada align=center>";
-						 echo $Parsedown->text(Cover($seccion));
-						 echo "</div>";
-						 break;
-					 case 'abstract':
-						 echo "<div class=resumen align=justify>";
-						 echo $Parsedown->text(Abstrct($seccion));
-						 echo "</div>";
-						 break;
-					 default:
-						 // code...
-						 break;
-				 }
-			 }
-			 foreach ($padre as $seccion){
-				 if($seccion->getName()=='toc'){
-					 echo "<div class=indice align=justify>";
-					 echo $Parsedown->text(Tc($seccion));
-					 echo "</div>";
+			 foreach ($padre as $seccion) {
+				 switch ($seccion->getName()) {
+				 	case 'section':
+				 		SectionFrontmatter($seccion, $Parsedown);
+				 		break;
+					case 'toc':
+						echo "<div class=indice align=justify>";
+					 	echo $Parsedown->text(Tc($seccion));
+					 	echo "</div>";
+					  break;
+				 	default:
+				 		// code...
+				 		break;
 				 }
 			 }
 		 }

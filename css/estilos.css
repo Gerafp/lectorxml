@@ -5,3 +5,12 @@ img{
   display:block;
   margin:auto;
 }
+
+table {
+    width: 100%;
+    border: 1px solid #000;
+}
+th, td{
+    border: 1px solid #000;
+    border-spacing: 0;
+}

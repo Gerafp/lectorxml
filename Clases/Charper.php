@@ -18,6 +18,13 @@
         case 'section':
           $texto .= Seccion($tipe, $nivel."#");
           break;
+        case 'verse':
+          $texto .= verse($tipe);
+          break;
+        case 'table':
+          //echo "---------------------------------------Hay una tabla ---------------------------------";
+          $texto .= table($tipe);
+          break;
         default:
           // code...
           break;

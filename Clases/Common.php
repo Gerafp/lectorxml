@@ -10,6 +10,9 @@ function h($value){
 function hc($value, $nivel){
   if($value->emph){
     #return $nivel." ".$value->emph."\n\n";
+    if ($value->emph->i){
+      return $nivel." ".$value->emph->asXML()."<a name=".ForInt($value->emph->i)."></a>\n\n";
+    }
     return $nivel." ".$value->emph."<a name=".ForInt($value->emph)."></a>\n\n";
   }
   #return $nivel." ".(String)$value."\n\n";
@@ -26,7 +29,13 @@ function p($value){
   } elseif ($value->object) {
     return obj($value->object)."\n".$value;
   }
-  return $value."\n\n";
+  if($value->u){
+    if($value->u->object){
+      return obj($value->u->object);
+    }
+    return "_".$value->u."_";
+  }
+  return $value->asXML()."\n\n";
 }
 
 function obj($value){
@@ -34,7 +43,7 @@ function obj($value){
   $texto = "";
   foreach ($value as $objcts) {
     $attb = $objcts->attributes();
-    $texto .= "![Aquí va una imagen](".$path.$attb['src'].")\n";
+    $texto .= "![](".$path.$attb['src'].")\n";
   }
   #$attb = $value->attributes();
   #return "![Texto Alternativo](".$attb['src'].")\n\n";
@@ -61,6 +70,15 @@ function qte($value){
 
 function ForInt($value){
   $aux = preg_replace('(\s[0-9]*)','',$value);
-  return str_replace('.',"",str_replace('*','',$aux));
+  return mb_strtolower(str_replace('.',"",str_replace('*','',$aux)), 'UTF-8');
+}
+
+function verse($value){
+  return $value->asXML()."\n\n";
+}
+
+function table($value){
+  //echo $value->asXML();
+  return $value->asXML()."\n\n";
 }
 ?>
