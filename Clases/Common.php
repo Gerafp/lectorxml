@@ -23,6 +23,8 @@ function p($value){
   if($value->emph){
     if ($value->emph->object) {
       return obj($value->emph->object)."\n".$value;
+    }elseif ($value->emph->i->object) {
+      return obj($value->emph->i->object)."\n".$value;
     }
     $aux =  $value->asXML();
     return $aux."\n\n";
