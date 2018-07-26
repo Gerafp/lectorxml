@@ -22,8 +22,10 @@
           $texto .= verse($tipe);
           break;
         case 'table':
-          //echo "---------------------------------------Hay una tabla ---------------------------------";
           $texto .= table($tipe);
+          break;
+        case 'caption':
+          $texto .= caption($tipe);
           break;
         default:
           // code...

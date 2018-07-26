@@ -16,7 +16,6 @@
     $codigo = $_GET['code'];
     $path = "".$codigo."/";
     $pathxml = $path.$codigo.".xml";
-
      ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,6 +30,9 @@
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
 </head>
 
@@ -40,41 +42,28 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+          <div class="menu-bar">
+            <div class="context-toggles">
+              <a href="#Figures" title="Figures" class="context-toggle figures" id="Figures"><i class="fa fa-picture-o"></i>Figuras</a>
+              <a href="#Contents" title="Contents" class="context-toggle toc" id="Contents"><i class="fa fa-align-left"></i>Índice</a>
+            </div>
+          </div>
+          <ul class="sidebar-nav">
+                <li class="sidebar-brand" id = "menu">
                     <a href="#">
-                        Start Bootstrap
+                        INICIO
                     </a>
                 </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#"></a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
+                <div class="entries" id = "entries">
+                </div>
+              </ul>
         </div>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>
                 <?php
                   if (file_exists($pathxml)) {
                     $texto = DebXML($pathxml);
@@ -84,19 +73,22 @@
                       switch ($principal['role']) {
                         case "frontmatter":
                           FrontMatter($principal, $Parsedown);
+                          echo "<br><br>";
                           break;
                         case 'bodymatter':
                           BodyMatter($principal, $Parsedown);
+                          echo "<br><br>";
                           break;
                         case 'backmatter':
                           BackMatter($principal, $Parsedown);
+                          echo "<br><br>";
                           break;
                         default:
                           echo "Sección desconocida";
                           break;
                       }
                     }
-
+                    CreateIndex();
                   } else {
                       exit('--Error-- <br>'.$codigo.".xml no existe");
                   }
@@ -111,13 +103,7 @@
                       case 'section':
                         SectionFrontmatter($seccion, $Parsedown);
                         break;
-                      case 'toc':
-                        echo "<div class=indice align=justify>";
-                        echo $Parsedown->text(Tc($seccion));
-                        echo "</div>";
-                        break;
                       default:
-                        // code...
                         break;
                      }
                    }
@@ -151,24 +137,43 @@
                  }
                 ?>
             </div>
+            <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+              <img class="w3-modal-content" id="img01" style="width:50%">
+            </div>
         </div>
         <!-- /#page-content-wrapper -->
-
     </div>
     <!-- /#wrapper -->
-
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+      $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+      });
 
+      window.onload= function(){
+        var list = "<?php echo $indice ?>";
+        document.getElementById("entries").innerHTML = list;
+      }
+      $("#Figures").click(function(e) {
+          var figuras = "<?php echo $imagenes ?>"
+          document.getElementById("entries").innerHTML = figuras;
+      });
+      $("#Contents").click(function(e) {
+        var list = "<?php echo $indice ?>";
+        document.getElementById("entries").innerHTML = list;
+      });
+
+      function ImgModal(element) {
+        $("#wrapper").toggleClass("toggled");
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+      }
+    </script>
 </body>
 
 </html>
