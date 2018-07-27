@@ -25,6 +25,7 @@ body {
   margin-left: -250px;
   overflow-y: auto;
   background: #fff;
+  border-left: 1px solid #ddd;
 }
 
 #wrapper.toggled #sidebar-wrapper {

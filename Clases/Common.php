@@ -21,6 +21,9 @@ function hc($value, $nivel){
     if ($value->emph->i){
       $indices["'".$value->emph->asXML()."'"] = ForInt(strip_tags($value->emph->asXML()));
       return $nivel." ".$value->emph->asXML()."<a name=".ForInt(strip_tags($value->emph->asXML()))."></a>\n\n";
+    } elseif ($value->emph->u) {
+      $indices["'".$value->emph->asXML()."'"] = ForInt(strip_tags($value->emph->asXML()));
+      return $nivel." ".$value->emph->asXML()."<a name=".ForInt(strip_tags($value->emph->asXML()))."></a>\n\n";
     }
     $indices["'".$value->emph."'"] = ForInt(strip_tags($value->emph));
     return $nivel." ".$value->asXML()."<a name=".ForInt(strip_tags($value->emph))."></a>\n\n";
@@ -33,11 +36,21 @@ function hc($value, $nivel){
 }
 
 function p($value){
+  global $path;
+  global $imagenes;
+
   if($value->emph){
     if ($value->emph->object) {
       return obj($value->emph->object)."\n".$value;
     }elseif ($value->emph->i->object) {
       return obj($value->emph->i->object)."\n".$value;
+    } elseif ($value->object) {
+      $attb = $value->object->attributes();
+      $imagenes .= "<img class='img-fluid' src=".$path.$attb['src']." onclick='ShowModal(this)'/>";
+      $aux = $value->asXML();
+      $aux = str_replace("object", "img", $aux);
+      $aux = str_replace($attb['src'], $path.$attb['src'], $aux);
+      return $aux;
     }
     $aux =  $value->asXML();
     return $aux."\n\n";
@@ -60,7 +73,7 @@ function obj($value){
   foreach ($value as $objcts) {
     $attb = $objcts->attributes();
     $texto .= "![](".$path.$attb['src'].")\n";
-    $imagenes .= "<img class='img-fluid' src=".$path.$attb['src']." onclick='ImgModal(this)'>";
+    $imagenes .= "<img class='img-fluid' src=".$path.$attb['src']." onclick='ShowModal(this)'>";
   }
   return $texto;
 }
@@ -93,7 +106,8 @@ function verse($value){
 }
 
 function table($value){
-  return $value->asXML()."\n\n";
+  return CheckImg($value->asXML())."\n\n";
+  //return $value->asXML()."\n\n";
 }
 
 function caption($value){
@@ -107,6 +121,23 @@ function CreateIndex(){
     //echo "{$clave} => {$valor} ";
     //echo "<li><a href=#{$valor}>$clave</a></li>";
     $indice .= "<li><a href=#{$valor}>$clave</a></li>";
+  }
+}
+
+function CheckImg($value){
+  global $path;
+  global $imagenes;
+  $patron = '-src\s*=\s*"([^"]+)"-';
+  $encontrado = preg_match_all($patron, $value, $coincidencias, PREG_OFFSET_CAPTURE);
+
+  if ($encontrado) {
+      foreach ($coincidencias[1] as $coincide) {
+          $aux =  str_replace("object", "img", str_replace($coincide[0], $path.$coincide[0], $value));
+          $imagenes .= "<img class='img-fluid' src=".$path.$coincide[0]." onclick='ShowModal(this)'>";
+          return $aux;
+      }
+  } else {
+      return $value;
   }
 }
 ?>

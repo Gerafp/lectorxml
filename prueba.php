@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar</title>
+    <title>Visor XML</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
           </div>
           <ul class="sidebar-nav">
                 <li class="sidebar-brand" id = "menu">
-                    <a href="#">
+                    <a href="#" id = "sidebartitle">
                         INICIO
                     </a>
                 </li>
@@ -137,7 +137,7 @@
                  }
                 ?>
             </div>
-            <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+            <div id="modal01" class="w3-modal" onclick="HideModal(this)">
               <img class="w3-modal-content" id="img01" style="width:50%">
             </div>
         </div>
@@ -161,17 +161,23 @@
       }
       $("#Figures").click(function(e) {
           var figuras = "<?php echo $imagenes ?>"
+          document.getElementById("sidebartitle").innerHTML = "FIGURAS";
           document.getElementById("entries").innerHTML = figuras;
       });
       $("#Contents").click(function(e) {
         var list = "<?php echo $indice ?>";
+        document.getElementById("sidebartitle").innerHTML = "ÍNDICE";
         document.getElementById("entries").innerHTML = list;
       });
 
-      function ImgModal(element) {
+      function ShowModal(element) {
         $("#wrapper").toggleClass("toggled");
         document.getElementById("img01").src = element.src;
         document.getElementById("modal01").style.display = "block";
+      }
+      function HideModal(element) {
+        $("#wrapper").toggleClass("toggled");
+        document.getElementById("modal01").style.display = "none";
       }
     </script>
 </body>
