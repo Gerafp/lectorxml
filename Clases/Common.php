@@ -19,19 +19,19 @@ function hc($value, $nivel){
 
   if($value->emph){
     if ($value->emph->i){
-      $indices["'".$value->emph->asXML()."'"] = ForInt(strip_tags($value->emph->asXML()));
+      $indices["'".strip_tags($value->emph->asXML())."'"] = ForInt(strip_tags($value->emph->asXML()));
       return $nivel." ".$value->emph->asXML()."<a name=".ForInt(strip_tags($value->emph->asXML()))."></a>\n\n";
     } elseif ($value->emph->u) {
-      $indices["'".$value->emph->asXML()."'"] = ForInt(strip_tags($value->emph->asXML()));
+      $indices["'".strip_tags($value->emph->asXML())."'"] = ForInt(strip_tags($value->emph->asXML()));
       return $nivel." ".$value->emph->asXML()."<a name=".ForInt(strip_tags($value->emph->asXML()))."></a>\n\n";
     }
-    $indices["'".$value->emph."'"] = ForInt(strip_tags($value->emph));
+    $indices["'".strip_tags($value->emph)."'"] = ForInt(strip_tags($value->emph));
     return $nivel." ".$value->asXML()."<a name=".ForInt(strip_tags($value->emph))."></a>\n\n";
   }elseif ($value->i) {
-    $indices["'".$value->i->asXML()."'"] = ForInt(strip_tags($value->i->emph));
-    return $nivel." ".$value->i->asXML()."<a name=".ForInt(strip_tags($value->i->emph))."></a>\n\n";
+    $indices["'".strip_tags($value->asXML())."'"] = ForInt(strip_tags($value->asXML()));
+    return $nivel." ".$value->asXML()."<a name=".ForInt(strip_tags($value->asXML()))."></a>\n\n";
   }
-  $indices["'".$value."'"] = ForInt(strip_tags($value));
+  $indices["'".strip_tags($value)."'"] = ForInt(strip_tags($value));
   return $nivel." ".(String)$value."<a name=".ForInt(strip_tags($value))."></a>\n\n";
 }
 
