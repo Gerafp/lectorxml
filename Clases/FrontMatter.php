@@ -5,17 +5,17 @@
       case 'cover':
         echo "<div class=portada align=center>";
         echo $Parsedown->text(Cover($seccion));
-        echo "</div>";
+        echo "<br></div>";
         break;
       case 'abstract':
         echo "<div class=resumen align=justify>";
         echo $Parsedown->text(Abstrct($seccion));
-        echo "</div>";
+        echo "<br></div>";
         break;
       default:
         echo "<div class=resumen align=justify>";
         echo $Parsedown->text(Seccion($seccion, '#'));
-        echo "</div>";
+        echo "<br></div>";
         break;
     }
   }

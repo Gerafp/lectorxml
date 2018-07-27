@@ -1,30 +1,56 @@
 <?php
 
+$indices = array();
+$indice = "";
+$imagenes = "";
+
 function h($value){
+  global $indices;
   if($value->emph){
-    return "# ".$value->emph."<a name=".$value->emph."></a>\n\n";
+    $indices["'".$value->emph."'"] = ForInt(strip_tags($value->emph));
+    return "# ".$value->emph."<a name=".ForInt(strip_tags($value->emph))."></a>\n\n";
   }
-  return "# ".(String)$value."<a name=".$value."></a>\n\n";
+  $indices["'".(String)$value."'"] = ForInt(strip_tags($value));
+  return "# ".(String)$value."<a name=".ForInt(strip_tags($value))."></a>\n\n";
 }
 
 function hc($value, $nivel){
+  global $indices;
+
   if($value->emph){
-    #return $nivel." ".$value->emph."\n\n";
     if ($value->emph->i){
-      return $nivel." ".$value->emph->asXML()."<a name=".ForInt($value->emph->i)."></a>\n\n";
+      $indices["'".$value->emph->asXML()."'"] = ForInt(strip_tags($value->emph->asXML()));
+      return $nivel." ".$value->emph->asXML()."<a name=".ForInt(strip_tags($value->emph->asXML()))."></a>\n\n";
+    } elseif ($value->emph->u) {
+      $indices["'".$value->emph->asXML()."'"] = ForInt(strip_tags($value->emph->asXML()));
+      return $nivel." ".$value->emph->asXML()."<a name=".ForInt(strip_tags($value->emph->asXML()))."></a>\n\n";
     }
-    return $nivel." ".$value->emph."<a name=".ForInt($value->emph)."></a>\n\n";
+    $indices["'".$value->emph."'"] = ForInt(strip_tags($value->emph));
+    return $nivel." ".$value->asXML()."<a name=".ForInt(strip_tags($value->emph))."></a>\n\n";
+  }elseif ($value->i) {
+    $indices["'".$value->i->asXML()."'"] = ForInt(strip_tags($value->i->emph));
+    return $nivel." ".$value->i->asXML()."<a name=".ForInt(strip_tags($value->i->emph))."></a>\n\n";
   }
-  #return $nivel." ".(String)$value."\n\n";
-  return $nivel." ".(String)$value."<a name=".ForInt($value)."></a>\n\n";
+  $indices["'".$value."'"] = ForInt(strip_tags($value));
+  return $nivel." ".(String)$value."<a name=".ForInt(strip_tags($value))."></a>\n\n";
 }
 
 function p($value){
+  global $path;
+  global $imagenes;
+
   if($value->emph){
     if ($value->emph->object) {
       return obj($value->emph->object)."\n".$value;
     }elseif ($value->emph->i->object) {
       return obj($value->emph->i->object)."\n".$value;
+    } elseif ($value->object) {
+      $attb = $value->object->attributes();
+      $imagenes .= "<img class='img-fluid' src=".$path.$attb['src']." onclick='ShowModal(this)'/>";
+      $aux = $value->asXML();
+      $aux = str_replace("object", "img", $aux);
+      $aux = str_replace($attb['src'], $path.$attb['src'], $aux);
+      return $aux;
     }
     $aux =  $value->asXML();
     return $aux."\n\n";
@@ -42,13 +68,13 @@ function p($value){
 
 function obj($value){
   global $path;
+  global $imagenes;
   $texto = "";
   foreach ($value as $objcts) {
     $attb = $objcts->attributes();
     $texto .= "![](".$path.$attb['src'].")\n";
+    $imagenes .= "<img class='img-fluid' src=".$path.$attb['src']." onclick='ShowModal(this)'>";
   }
-  #$attb = $value->attributes();
-  #return "![Texto Alternativo](".$attb['src'].")\n\n";
   return $texto;
 }
 
@@ -80,7 +106,38 @@ function verse($value){
 }
 
 function table($value){
-  //echo $value->asXML();
+  return CheckImg($value->asXML())."\n\n";
+  //return $value->asXML()."\n\n";
+}
+
+function caption($value){
   return $value->asXML()."\n\n";
+}
+
+function CreateIndex(){
+  global $indices;
+  global $indice;
+  foreach ($indices as $clave => $valor) {
+    //echo "{$clave} => {$valor} ";
+    //echo "<li><a href=#{$valor}>$clave</a></li>";
+    $indice .= "<li><a href=#{$valor}>$clave</a></li>";
+  }
+}
+
+function CheckImg($value){
+  global $path;
+  global $imagenes;
+  $patron = '-src\s*=\s*"([^"]+)"-';
+  $encontrado = preg_match_all($patron, $value, $coincidencias, PREG_OFFSET_CAPTURE);
+
+  if ($encontrado) {
+      foreach ($coincidencias[1] as $coincide) {
+          $aux =  str_replace("object", "img", str_replace($coincide[0], $path.$coincide[0], $value));
+          $imagenes .= "<img class='img-fluid' src=".$path.$coincide[0]." onclick='ShowModal(this)'>";
+          return $aux;
+      }
+  } else {
+      return $value;
+  }
 }
 ?>

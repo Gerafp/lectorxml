@@ -1,5 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<?php
+include('lib/Parsedown.php');
+
+include('Clases/Common.php');
+include('Clases/Clean.php');
+include('Clases/FrontMatter.php');
+include('Clases/Charper.php');
+include('Clases/Bibliography.php');
+
+$Parsedown = new Parsedown();
+
+//Creacion de los paths
+$codigo = $_GET['code'];
+$path = "".$codigo."/";
+$pathxml = $path.$codigo.".xml";
+
+ ?>
+<html lang="es" dir="ltr">
 	<head>
 		<meta charset="utf-8">
 		<title>Lector XML</title>
@@ -7,22 +24,6 @@
 	</head>
 	<body>
 		<?php
-			include('lib/Parsedown.php');
-
-			include('Clases/Common.php');
-			include('Clases/Clean.php');
-			include('Clases/FrontMatter.php');
-			include('Clases/Charper.php');
-			include('Clases/Bibliography.php');
-
-			$Parsedown = new Parsedown();
-			$codigo = $_GET['code'];
-
-			$path = "".$codigo."/"; #Aquí va el Path de acceso a los recursos
-			$pathxml = $path.$codigo.".xml";
-			//echo $pathxml;
-
-
 			if (file_exists($pathxml)) {
 				$texto = DebXML($pathxml);
 				$xml = new SimpleXMLElement($texto , 0);
@@ -74,7 +75,7 @@
 			 foreach ($padre->section as $seccion){
 					 echo $Parsedown->text(Seccion($seccion,""));
 				 }
-			 echo "</div></div>";
+			 echo "</div>";
 		 }
 
 		 function BackMatter($padre, $Parsedown){
@@ -97,5 +98,6 @@
 			 echo "</div>";
 		 }
 		?>
+		</div>
 	</body>
 </html>

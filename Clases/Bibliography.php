@@ -17,6 +17,9 @@ function biBliography($seccion){
 }
 
 function Entry($entrada){
+  if ($entrada->object) {
+    return obj($entrada->object);
+  }
   $aux = $entrada->attributes();
   return $aux['id'].". ".$entrada."\n";
 }

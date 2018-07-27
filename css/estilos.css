@@ -6,6 +6,11 @@ img{
   margin:auto;
 }
 
+caption{
+  display:block;
+  margin:auto;
+}
+
 table {
     width: 100%;
     border: 1px solid #000;
@@ -13,4 +18,49 @@ table {
 th, td{
     border: 1px solid #000;
     border-spacing: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+.menu-bar {
+  top: 0px;
+  height: 40px;
+  left: 0px;
+  right: 0px;
+  /*background: #444;*/
+  color: #444;
+  border-bottom: 1px solid #ddd;
+  z-index: 20000; }
+
+.menu-bar .context-toggles a {
+  display: inline-block;
+  float: right;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 0.4);
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+.menu-bar .context-toggles a.context-toggle.hidden {
+  display: none;
+}
+
+.menu-bar .context-toggles a:hover {
+  /*color: #fff;*/
+  color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.menu-bar .context-toggles a.active {
+  background: rgba(0, 0, 0, 0.05);
+  color: #444;
+  border-bottom: 3px solid #444;
 }
