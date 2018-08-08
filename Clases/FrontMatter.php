@@ -24,6 +24,9 @@
     foreach ($seccion->p as $elemento) {
       if($elemento->emph){
         $texto .= "### ".$elemento->emph."\n\n";
+        if($elemento->emph->object){
+          $texto .= obj($elemento->emph->object);
+        }
       }
       elseif ($elemento->object) {
         $texto .= obj($elemento->object);

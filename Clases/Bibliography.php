@@ -34,6 +34,9 @@ function Apendix($seccion){
       case 'p':
         $texto .= p($tipe);
         break;
+      case 'table':
+        $texto .= table($tipe);
+        break;
       default:
         //code
         break;

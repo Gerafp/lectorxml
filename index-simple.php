@@ -12,7 +12,7 @@ $Parsedown = new Parsedown();
 
 //Creacion de los paths
 $codigo = $_GET['code'];
-$path = "".$codigo."/";
+$path = "ibsa-tesis/xml/".$codigo."/";
 $pathxml = $path.$codigo.".xml";
 
  ?>

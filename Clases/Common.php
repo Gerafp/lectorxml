@@ -66,6 +66,29 @@ function p($value){
   return $value->asXML()."\n\n";
 }
 
+function paux($value){
+    $texto = $value->asXML();
+    //$p = strval($value->asXML());
+    $re = '/'.'<object id="[a-zA-Z0-9]*"\ssrc="[a-zA-Z0-9]*\-[a-zA-Z0-9.]*"\/>'.'/';
+    if (preg_match($re, strval($value->asXML()), $matches)){
+        foreach ($matches as $match) {
+          $texto = str_replace($match, objaux($match), $texto);
+        }
+    }
+    return $texto;
+}
+
+function objaux($value){
+  global $path;
+  global $imagenes;
+  $xml = new SimpleXMLElement($value, 0);
+  $texto = "";
+  $attb = $xml->attributes();
+  $texto .= "![](".$path.$attb['src'].")";
+  $imagenes .= "<img class='img-fluid' src=".$path.$attb['src']." onclick='ShowModal(this)'>";
+  return $texto;
+}
+
 function obj($value){
   global $path;
   global $imagenes;

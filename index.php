@@ -14,7 +14,7 @@
 
     //Creacion de los paths
     $codigo = $_GET['code'];
-    $path = "".$codigo."/";
+    $path = "Pruebas/".$codigo."/";
     $pathxml = $path.$codigo.".xml";
      ?>
     <meta charset="utf-8">
@@ -25,7 +25,7 @@
     <title>Visor XML</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -111,7 +111,7 @@
                  function BodyMatter($padre, $Parsedown){
                    echo "<div class=BodyMatter align=justify>";
                    foreach ($padre->section as $seccion){
-                       echo $Parsedown->text(Seccion($seccion,""));
+                       echo Seccion($seccion,"");
                      }
                    echo "</div>";
                  }
