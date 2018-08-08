@@ -4,10 +4,10 @@
     foreach ($seccion as $tipe) {
       switch ((string)$tipe->getName()) {
         case 'h':
-          $texto .= hc($tipe, $nivel."#");
+          $texto .= hcc($tipe, $nivel);
           break;
         case 'p':
-          $texto .= p($tipe);
+          $texto .= pc($tipe);
           break;
         case 'list':
           $texto .= lst($tipe);
@@ -16,13 +16,13 @@
             $texto .= qte($tipe);
             break;
         case 'section':
-          $texto .= Seccion($tipe, $nivel."#");
+          $texto .= Seccion($tipe, $nivel+1);
           break;
         case 'verse':
           $texto .= verse($tipe);
           break;
         case 'table':
-          $texto .= table($tipe);
+          $texto .= tablec($tipe);
           break;
         case 'caption':
           $texto .= caption($tipe);

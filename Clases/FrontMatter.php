@@ -14,7 +14,7 @@
         break;
       default:
         echo "<div class=resumen align=justify>";
-        echo $Parsedown->text(Seccion($seccion, '#'));
+        echo Seccion($seccion, 1);
         echo "<br></div>";
         break;
     }

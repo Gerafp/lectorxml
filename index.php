@@ -111,7 +111,7 @@
                  function BodyMatter($padre, $Parsedown){
                    echo "<div class=BodyMatter align=justify>";
                    foreach ($padre->section as $seccion){
-                       echo Seccion($seccion,"");
+                       echo Seccion($seccion, 1);
                      }
                    echo "</div>";
                  }
@@ -125,7 +125,10 @@
                         break;
                       case 'section':
                         if ($seccion['role'] == "apendix") {
-                          echo $Parsedown->text(Apendix($seccion));
+                          echo Apendix($seccion);
+                        }else if ($seccion['role'] == "footnotes") {
+                          echo "<h1>Footnotes</h1>";
+                          echo footNotes($seccion);
                         }
                         break;
                       default:
