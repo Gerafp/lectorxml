@@ -15,6 +15,7 @@ function h($value){
 }
 
 
+
 function obj($value){
   global $path;
   global $imagenes;
@@ -51,9 +52,17 @@ function ForInt($value){
 }
 
 function verse($value){
-  return "<div class=cita>".$value->ln->asXML()."</div>";
+  $text = "<div class=cita>";
+  foreach ($value->ln as $linea) {
+    $text .= $linea->asXML()."<br>";
+  }
+  return $text."</div><br>";
 }
 
+function table($value){
+  return CheckImg($value->asXML())."\n\n";
+  //return $value->asXML()."\n\n";
+}
 
 function tablec($value){
   $texto = $value->asXML();
@@ -68,17 +77,43 @@ function tablec($value){
 
 
 function caption($value){
-  return "<figcaption>".$value->asXML()."</figcaption>";
+  $texto = $value->asXML();
+  $re = '/'.'<object id="[a-zA-Z0-9]*"\ssrc="[a-zA-Z0-9_-]*\-[a-zA-Z0-9.]*"\/>'.'/';
+  if (preg_match_all($re, strval($value->asXML()), $matches)){
+      foreach ($matches[0] as $match) {
+        $texto = str_replace($match, objc($match), $texto);
+      }
+  }
+  //return $texto;
+  return "<figcaption>".$texto."</figcaption>";
 }
 
 function CreateIndex(){
   global $indices;
   global $indice;
   foreach ($indices as $clave => $valor) {
+    //echo "{$clave} => {$valor} ";
+    //echo "<li><a href=#{$valor}>$clave</a></li>";
     $indice .= "<li><a href=#{$valor}>$clave</a></li>";
   }
 }
 
+function CheckImg($value){
+  global $path;
+  global $imagenes;
+  $patron = '-src\s*=\s*"([^"]+)"-';
+  $encontrado = preg_match_all($patron, $value, $coincidencias, PREG_OFFSET_CAPTURE);
+
+  if ($encontrado) {
+      foreach ($coincidencias[1] as $coincide) {
+          $aux =  str_replace("object", "img", str_replace($coincide[0], $path.$coincide[0], $value));
+          $imagenes .= "<img class='img-fluid' src=".$path.$coincide[0]." onclick='ShowModal(this)'>";
+          return $aux;
+      }
+  } else {
+      return $value;
+  }
+}
 
 function hcc($value, $nivel){
   $xmlText = new DOMDocument();

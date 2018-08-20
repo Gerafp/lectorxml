@@ -36,9 +36,9 @@
 
 </head>
 
-<body>
+<body onselectstart="return false;" ondragstart="return false;">
 
-    <div id="wrapper">
+    <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -63,7 +63,7 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>
+                <!--<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>-->
                 <?php
                   if (file_exists($pathxml)) {
                     $texto = DebXML($pathxml);
@@ -129,6 +129,8 @@
                         }else if ($seccion['role'] == "footnotes") {
                           echo "<h1>Footnotes</h1>";
                           echo footNotes($seccion);
+                        }else {
+                          echo Seccion($seccion, 1);
                         }
                         break;
                       default:

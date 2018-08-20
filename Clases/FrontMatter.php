@@ -43,9 +43,9 @@
     #echo $seccion->h->emph;
     foreach ($seccion as $elemento) {
       if((string)$elemento->getName() == "h"){
-        $texto .= h($elemento);
+        $texto .= hcc($elemento, 1);
       }elseif ((string)$elemento->getName() == "p") {
-        $texto .= p($elemento);
+        $texto .= pc($elemento);
       }
     }
     return $texto;

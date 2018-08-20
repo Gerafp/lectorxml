@@ -37,6 +37,9 @@ function Apendix($seccion){
       case 'table':
         $texto .= tablec($tipe);
         break;
+      case 'list':
+          $texto .= lst($tipe);
+          break;
       default:
         //code
         break;
