@@ -14,7 +14,7 @@
 
     //Creacion de los paths
     $codigo = $_GET['code'];
-    $path = "".$codigo."/";
+    $path = "Pruebas/".$codigo."/";
     $pathxml = $path.$codigo.".xml";
      ?>
     <meta charset="utf-8">
@@ -25,7 +25,7 @@
     <title>Visor XML</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -36,9 +36,9 @@
 
 </head>
 
-<body>
+<body onselectstart="return false;" ondragstart="return false;">
 
-    <div id="wrapper">
+    <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -63,7 +63,7 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>
+                <!--<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>-->
                 <?php
                   if (file_exists($pathxml)) {
                     $texto = DebXML($pathxml);
@@ -111,7 +111,7 @@
                  function BodyMatter($padre, $Parsedown){
                    echo "<div class=BodyMatter align=justify>";
                    foreach ($padre->section as $seccion){
-                       echo $Parsedown->text(Seccion($seccion,""));
+                       echo Seccion($seccion, 1);
                      }
                    echo "</div>";
                  }
@@ -125,7 +125,12 @@
                         break;
                       case 'section':
                         if ($seccion['role'] == "apendix") {
-                          echo $Parsedown->text(Apendix($seccion));
+                          echo Apendix($seccion);
+                        }else if ($seccion['role'] == "footnotes") {
+                          echo "<h1>Footnotes</h1>";
+                          echo footNotes($seccion);
+                        }else {
+                          echo Seccion($seccion, 1);
                         }
                         break;
                       default:

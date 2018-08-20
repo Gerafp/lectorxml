@@ -14,7 +14,7 @@
         break;
       default:
         echo "<div class=resumen align=justify>";
-        echo $Parsedown->text(Seccion($seccion, '#'));
+        echo Seccion($seccion, 1);
         echo "<br></div>";
         break;
     }
@@ -24,6 +24,9 @@
     foreach ($seccion->p as $elemento) {
       if($elemento->emph){
         $texto .= "### ".$elemento->emph."\n\n";
+        if($elemento->emph->object){
+          $texto .= obj($elemento->emph->object);
+        }
       }
       elseif ($elemento->object) {
         $texto .= obj($elemento->object);
@@ -40,9 +43,9 @@
     #echo $seccion->h->emph;
     foreach ($seccion as $elemento) {
       if((string)$elemento->getName() == "h"){
-        $texto .= h($elemento);
+        $texto .= hcc($elemento, 1);
       }elseif ((string)$elemento->getName() == "p") {
-        $texto .= p($elemento);
+        $texto .= pc($elemento);
       }
     }
     return $texto;

@@ -1,5 +1,19 @@
+.cita {
+    margin-left: 65%;
+    font-weight: bold;
+    font-style: italic;
+}
+
+figcaption{
+  text-align: center;
+  font-weight: bold;
+}
 emph {
     font-weight: bold;
+}
+
+address {
+    display: inline;
 }
 img{
   display:block;
