@@ -14,7 +14,7 @@
 
     //Creacion de los paths
     $codigo = $_GET['code'];
-    $path = "Pruebas/".$codigo."/";
+    $path = "ibsa-tesis/xml/".$codigo."/";
     $pathxml = $path.$codigo.".xml";
      ?>
     <meta charset="utf-8">
@@ -28,8 +28,8 @@
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+    <link rel="stylesheet" href="vendor/css/simple-sidebar.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css/estilos.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
@@ -62,8 +62,10 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <!--<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>-->
+          <div id = "my-fixed-item">
+            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>
+          </div>
+            <div class="container-fluid"  onclick="HideSidebar(this)">
                 <?php
                   if (file_exists($pathxml)) {
                     $texto = DebXML($pathxml);
@@ -155,10 +157,15 @@
 
     <!-- Menu Toggle Script -->
     <script>
+
       $("#menu-toggle").click(function(e) {
           e.preventDefault();
           $("#wrapper").toggleClass("toggled");
       });
+
+      function HideSidebar(element){
+          $("#wrapper").toggleClass("toggled");
+      }
 
       window.onload= function(){
         var list = "<?php echo $indice ?>";
