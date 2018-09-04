@@ -4,12 +4,12 @@
     switch ($seccion['role']) {
       case 'cover':
         echo "<div class=portada align=center>";
-        echo $Parsedown->text(Cover($seccion));
+        echo Cover($seccion);
         echo "<br></div>";
         break;
       case 'abstract':
         echo "<div class=resumen align=justify>";
-        echo $Parsedown->text(Abstrct($seccion));
+        echo Abstrct($seccion);
         echo "<br></div>";
         break;
       default:
@@ -19,21 +19,11 @@
         break;
     }
   }
+
   function Cover($seccion){
     $texto = '';
     foreach ($seccion->p as $elemento) {
-      if($elemento->emph){
-        $texto .= "### ".$elemento->emph."\n\n";
-        if($elemento->emph->object){
-          $texto .= obj($elemento->emph->object);
-        }
-      }
-      elseif ($elemento->object) {
-        $texto .= obj($elemento->object);
-      }
-      else {
-        $texto .= "#### ".$elemento."\n\n";
-      }
+      $texto .= "<h2>".pc($elemento)."</h2>";
     }
     return $texto;
   }

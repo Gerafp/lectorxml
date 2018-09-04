@@ -14,7 +14,7 @@
 
     //Creacion de los paths
     $codigo = $_GET['code'];
-    $path = "ibsa-tesis/xml/".$codigo."/";
+    $path = "Paquete-Ibero-XML/".$codigo."/";
     $pathxml = $path.$codigo.".xml";
      ?>
     <meta charset="utf-8">
