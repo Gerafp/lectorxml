@@ -23,7 +23,7 @@
   function Cover($seccion){
     $texto = '';
     foreach ($seccion->p as $elemento) {
-      $texto .= "<h2>".pc($elemento)."</h2>";
+      $texto .= "<h3>".pc($elemento)."</h2>";
     }
     return $texto;
   }

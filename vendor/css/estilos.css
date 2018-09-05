@@ -68,7 +68,6 @@ th, td{
 }
 
 .menu-bar .context-toggles a:hover {
-  /*color: #fff;*/
   color: rgba(0, 0, 0, 0.5);
   background: rgba(0, 0, 0, 0.03);
 }
@@ -83,4 +82,10 @@ th, td{
 #my-fixed-item {
     position: fixed;
     text-align: center;
+}
+
+.frontmatter, .BodyMatter, .BackMatter{
+  font-family: "Avenir Next", "Helvetica", arial, sans-serif;
+  line-height: 28.5px;
+  font-size: 17px;
 }
