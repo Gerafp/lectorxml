@@ -61,7 +61,7 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-          <div id = "my-fixed-item">
+          <div id = "item-float">
             <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Contenido</a>
           </div>
             <div class="container-fluid"  onclick="HideSidebar(this)">
@@ -108,6 +108,7 @@
                         break;
                      }
                    }
+                   echo "<hr>";
                  }
                  function BodyMatter($padre, $Parsedown){
                    echo "<div class=BodyMatter align=justify>";
@@ -115,6 +116,7 @@
                        echo Seccion($seccion, 1);
                      }
                    echo "</div>";
+                   echo "<hr>";
                  }
 
                  function BackMatter($padre, $Parsedown){
@@ -140,11 +142,12 @@
                      }
                    }
                    echo "</div>";
+                   echo "<hr>";
                  }
                 ?>
             </div>
             <div id="modal01" class="w3-modal" onclick="HideModal(this)">
-              <img class="w3-modal-content" id="img01" style="width:50%">
+              <img class="w3-modal-content" id="img01" style="width:25%">
             </div>
         </div>
         <!-- /#page-content-wrapper -->

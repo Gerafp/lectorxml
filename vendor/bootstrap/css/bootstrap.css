@@ -576,11 +576,13 @@ pre code {
 }
 
 .container-fluid {
+  background-color: #fff;
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding: 50px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 50px;
+  font-family: "Avenir Next", "Helvetica", arial, sans-serif;
 }
 
 .row {
