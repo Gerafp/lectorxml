@@ -4,5 +4,10 @@ Proyecto para la creación de un lector de archivos XML con formato propio.
 
 # Estado actual
 
-- Se renovaron las clases que traducen los archivos para acelerar la conversion a HTML.
+- Desarrollo detenido proyecto olvidado y libre.
+
+# Ejemplos
+
+http://ri.ibero.mx:8080/viewer/?code=1569495
+http://ri.ibero.mx:8080/viewer/?code=015253
 
