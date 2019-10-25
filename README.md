@@ -8,6 +8,6 @@ Proyecto para la creación de un lector de archivos XML con formato propio.
 
 # Ejemplos
 
-http://ri.ibero.mx:8080/viewer/?code=1569495
-http://ri.ibero.mx:8080/viewer/?code=015253
+- http://ri.ibero.mx:8080/viewer/?code=1569495
+- http://ri.ibero.mx:8080/viewer/?code=015253
 
